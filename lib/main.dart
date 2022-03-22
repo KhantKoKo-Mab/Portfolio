@@ -41,11 +41,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final ItemScrollController _itemScrollController = new ItemScrollController();
+  final _itemPositionListener = ItemPositionsListener.create();
 
   Widget body() {
     return Container(
       child: ScrollablePositionedList.builder(
         itemScrollController: _itemScrollController,
+        itemPositionsListener: _itemPositionListener,
         itemCount: 5,
         itemBuilder: (_, i) {
           if (i == 0)
@@ -85,15 +87,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     width: lrMargin * 1.3,
                   ),
-                  SizedBox(
-                    //width: 400,
-                    child: Text(
-                      mediaQuery.width.toString(),
-                      style: Theme.of(context).textTheme.headline6!,
-                    ),
-                  ),
+                  // SizedBox(
+                  //   child: Text(
+                  //     mediaQuery.width.toString(),
+                  //     style: Theme.of(context).textTheme.headline6!,
+                  //   ),
+                  // ),
                   NavBar(
                     itemScrollController: _itemScrollController,
+                    itemPositionListener: _itemPositionListener,
                   ),
                   Container(
                     width: lrMargin,

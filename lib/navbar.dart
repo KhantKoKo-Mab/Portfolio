@@ -6,9 +6,11 @@ class NavBar extends StatefulWidget {
   const NavBar({
     Key? key,
     required this.itemScrollController,
+    required this.itemPositionListener,
   }) : super(key: key);
 
   final ItemScrollController itemScrollController;
+  final ItemPositionsListener itemPositionListener;
 
   @override
   _NavBarState createState() => _NavBarState();
@@ -17,6 +19,30 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   int _selectedIndex = 0;
   int _hoverIndex = -1;
+
+  @override
+  void initState() {
+    widget.itemPositionListener.itemPositions.addListener(scrollListener);
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    widget.itemPositionListener.itemPositions.removeListener(scrollListener);
+    super.dispose();
+  }
+
+  scrollListener() {
+    var index = widget.itemPositionListener.itemPositions.value
+        .map((e) => e.index)
+        .first;
+    if (index != _selectedIndex) {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
+  }
 
   void _animateToIndex(int index) {
     widget.itemScrollController.scrollTo(

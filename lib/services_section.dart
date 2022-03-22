@@ -19,7 +19,7 @@ class ServicesSection extends StatelessWidget {
         children: [
           Icon(
             icon,
-            color: Colors.grey.shade300,
+            color: Colors.grey.shade500,
             size: 40,
           ),
           SizedBox(
@@ -75,8 +75,8 @@ class ServicesSection extends StatelessWidget {
               SizedBox(
                 width: 20,
               ),
-              roundedCard(context, Icons.flight_sharp, 'Quality',
-                  'Reliablity and durabilty with customer satisfaction.'),
+              roundedCard(context, Icons.scatter_plot, 'Promises',
+                  'Reliablity, durabilty and customer satisfaction.'),
               SizedBox(width: 20),
               roundedCard(context, Icons.code_sharp, 'Clean Code',
                   'Easier to understand, change and maintain with no complexity.'),
@@ -111,8 +111,8 @@ class ServicesSection extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          roundedCard(context, Icons.flight_sharp, 'Quality',
-              'Reliablity and durabilty with customer satisfaction.'),
+          roundedCard(context, Icons.scatter_plot, 'Promises',
+              'Reliablity, durabilty and customer satisfaction.'),
           SizedBox(
             height: 30,
           ),
