@@ -70,16 +70,16 @@ class ServicesSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              roundedCard(context, Icons.desktop_windows_sharp, 'Development',
-                  'Innovative designs with responsiveness across all size of devices.'),
+              roundedCard(context, Icons.desktop_windows_sharp, 'Application',
+                  'Fresh and responsive design for all devices.'),
               SizedBox(
                 width: 20,
               ),
               roundedCard(context, Icons.flight_sharp, 'Quality',
-                  'Reliablity and durabilty for your satisfaction.'),
+                  'Reliablity and durabilty with customer satisfaction.'),
               SizedBox(width: 20),
               roundedCard(context, Icons.code_sharp, 'Clean Code',
-                  'Easier to understand, change and maintain with least complexity.'),
+                  'Easier to understand, change and maintain with no complexity.'),
             ],
           ),
         ],
@@ -106,18 +106,18 @@ class ServicesSection extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          roundedCard(context, Icons.desktop_windows_sharp, 'Development',
-              'Innovative designs with responsiveness across all size of devices.'),
+          roundedCard(context, Icons.desktop_windows_sharp, 'Application',
+              'Fresh and responsive design for all devices.'),
           SizedBox(
             height: 30,
           ),
           roundedCard(context, Icons.flight_sharp, 'Quality',
-              'Reliablity and durabilty for your satisfaction.'),
+              'Reliablity and durabilty with customer satisfaction.'),
           SizedBox(
             height: 30,
           ),
           roundedCard(context, Icons.code_sharp, 'Clean Code',
-              'Easier to understand, change and maintain with least complexity.'),
+              'Easier to understand, change and maintain with no complexity.'),
         ],
       ),
     );
