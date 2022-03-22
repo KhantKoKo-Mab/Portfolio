@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/about.dart';
-import 'package:portfolio/home.dart';
+import 'package:portfolio/services_section.dart';
+import 'package:portfolio/skill_section.dart';
+import 'package:portfolio/home_section.dart';
 import 'package:portfolio/navbar.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -47,14 +48,22 @@ class _MyHomePageState extends State<MyHomePage> {
         itemScrollController: _itemScrollController,
         itemCount: 5,
         itemBuilder: (_, i) {
-          return Container(
-            width: double.infinity,
-            child: i == 0
-                ? HomeSection()
-                : i == 1
-                    ? AboutSection()
-                    : null,
-          );
+          if (i == 0)
+            return Container(
+              width: double.infinity,
+              child: HomeSection(),
+            );
+          if (i == 1)
+            return Container(
+              width: double.infinity,
+              child: Column(
+                children: [
+                  SkillSection(),
+                  ServicesSection(),
+                ],
+              ),
+            );
+          return Container();
         },
       ),
     );

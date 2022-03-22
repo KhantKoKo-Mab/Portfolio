@@ -91,9 +91,11 @@ class _NavBarState extends State<NavBar> {
           _spacer(),
           menuItem(index: 1, text: 'About'),
           _spacer(),
-          menuItem(index: 2, text: 'Experience'),
+          menuItem(index: 2, text: 'Education'),
           _spacer(),
-          menuItem(index: 4, text: 'Contact'),
+          menuItem(index: 3, text: 'Experience'),
+          _spacer(),
+          menuItem(index: 3, text: 'Contact'),
         ],
       ),
     );

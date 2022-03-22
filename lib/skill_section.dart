@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/responsive.dart';
 
-class AboutSection extends StatelessWidget {
-  const AboutSection({Key? key}) : super(key: key);
+class SkillSection extends StatelessWidget {
+  const SkillSection({Key? key}) : super(key: key);
 
   Widget skillPercent(context, String title, double percent) {
     double width = Responsive.isTablet(context)
@@ -11,6 +11,7 @@ class AboutSection extends StatelessWidget {
             ? 250
             : 300;
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center, //remove
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
@@ -60,31 +61,6 @@ class AboutSection extends StatelessWidget {
     );
   }
 
-  Widget skillsWidget(context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'About',
-          style: Theme.of(context).textTheme.headline6!.copyWith(
-                fontSize: 30,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 4,
-              ),
-        ),
-        SizedBox(
-          height: 30,
-        ),
-        skillPercent(context, "C#", 86),
-        skillPercent(context, "Flutter", 70),
-        skillPercent(context, "Java", 65),
-        skillPercent(context, "Angular", 60),
-        skillPercent(context, "HTML, CSS, JS", 75),
-      ],
-    );
-  }
-
   Widget expertItem(context, String title) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -102,6 +78,7 @@ class AboutSection extends StatelessWidget {
           ),
           Text(
             title,
+            textAlign: TextAlign.left,
             style: TextStyle(
               color: Color(0xff293651),
               fontSize: 18,
@@ -122,7 +99,8 @@ class AboutSection extends StatelessWidget {
         expertItem(context, 'Azure Cloud'),
         expertItem(context, 'Power BI'),
         expertItem(context, 'Data Centralization'),
-        expertItem(context, 'ERP System Knowledge'),
+        expertItem(context, 'Data Migration'),
+        expertItem(context, 'Replication & Mirroring'),
       ],
     );
   }
@@ -135,6 +113,7 @@ class AboutSection extends StatelessWidget {
         expertItem(context, 'App Development'),
         expertItem(context, 'Mobile Development'),
         expertItem(context, 'Web Development'),
+        expertItem(context, 'ERP & Retails'),
         expertItem(context, 'Photoshop'),
         expertItem(context, 'Graphic Design'),
       ],
@@ -172,30 +151,77 @@ class AboutSection extends StatelessWidget {
     );
   }
 
-  Widget desktopAbout(context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        skillsWidget(context),
-        SizedBox(
-          width: 50,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 50.0),
-          child: expertizeWidget(context),
-        ),
-      ],
+  Widget desktopLayout(context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 50),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Skills',
+                style: Theme.of(context).textTheme.headline6!.copyWith(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 4,
+                    ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              skillPercent(context, "C#", 85),
+              skillPercent(context, "Flutter", 70),
+              skillPercent(context, "Java", 65),
+              skillPercent(context, "Angular", 60),
+              skillPercent(context, "HTML, CSS, JS", 75),
+              skillPercent(context, "SQL", 80),
+            ],
+          ),
+          SizedBox(
+            width: 50,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 50.0),
+            child: expertizeWidget(context),
+          ),
+        ],
+      ),
     );
   }
 
-  Widget tabletAbout(context) {
+  Widget tabletLayout(context) {
     return Container(
       margin: const EdgeInsets.all(30),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center, //s
         children: [
-          skillsWidget(context),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center, //s
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Skills',
+                style: Theme.of(context).textTheme.headline6!.copyWith(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 4,
+                    ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              skillPercent(context, "C#", 85),
+              skillPercent(context, "Flutter", 70),
+              skillPercent(context, "Java", 65),
+              skillPercent(context, "Angular", 60),
+              skillPercent(context, "HTML, CSS, JS", 75),
+              skillPercent(context, "SQL", 80),
+            ],
+          ),
           SizedBox(
             height: 30,
           ),
@@ -212,7 +238,7 @@ class AboutSection extends StatelessWidget {
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               expertItemGroup1(context),
               SizedBox(
@@ -226,13 +252,29 @@ class AboutSection extends StatelessWidget {
     );
   }
 
-  Widget mobileAbout(context) {
+  Widget mobileLayout(context) {
     return Container(
       margin: const EdgeInsets.all(30),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center, //s
         children: [
-          skillsWidget(context),
+          Text(
+            'Skills',
+            style: Theme.of(context).textTheme.headline6!.copyWith(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 4,
+                ),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          skillPercent(context, "C#", 85),
+          skillPercent(context, "Flutter", 70),
+          skillPercent(context, "Java", 65),
+          skillPercent(context, "Angular", 60),
+          skillPercent(context, "HTML, CSS, JS", 75),
+          skillPercent(context, "SQL", 80),
           SizedBox(
             height: 30,
           ),
@@ -247,11 +289,17 @@ class AboutSection extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          expertItemGroup1(context),
+          Container(
+            child: expertItemGroup1(context),
+            width: 400,
+          ),
           SizedBox(
             width: 80,
           ),
-          expertItemGroup2(context),
+          Container(
+            child: expertItemGroup2(context),
+            width: 400,
+          ),
         ],
       ),
     );
@@ -260,13 +308,14 @@ class AboutSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //color: Color(0xfff9f9f9),
       margin: Responsive.isDesktop(context)
           ? const EdgeInsets.only(top: 30, bottom: 30)
           : EdgeInsets.all(0),
       child: Responsive(
-        desktop: desktopAbout(context),
-        mobile: mobileAbout(context),
-        tablet: tabletAbout(context),
+        desktop: desktopLayout(context),
+        tablet: tabletLayout(context),
+        mobile: mobileLayout(context),
       ),
     );
   }

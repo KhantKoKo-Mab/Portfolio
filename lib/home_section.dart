@@ -91,7 +91,7 @@ class HomeSection extends StatelessWidget {
     );
   }
 
-  Widget desktopHome(context) {
+  Widget desktopLayout(context) {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -123,11 +123,11 @@ class HomeSection extends StatelessWidget {
     );
   }
 
-  Widget defaultHome(context) {
+  Widget otherLayout(context) {
     return Container(
       margin: const EdgeInsets.all(30),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -156,11 +156,11 @@ class HomeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xfff9f9f9),
+      color: Colors.white,
       child: Responsive(
-        desktop: desktopHome(context),
-        tablet: defaultHome(context),
-        mobile: defaultHome(context),
+        desktop: desktopLayout(context),
+        tablet: otherLayout(context),
+        mobile: otherLayout(context),
       ),
     );
   }
