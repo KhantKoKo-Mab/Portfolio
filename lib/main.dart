@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/Providers/item_scroll_provider.dart';
 import 'package:portfolio/footer_section.dart';
+import 'package:portfolio/responsive.dart';
 import 'package:portfolio/services_section.dart';
 import 'package:portfolio/skill_section.dart';
 import 'package:portfolio/home_section.dart';
@@ -50,8 +51,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final ItemScrollController _itemScrollController = new ItemScrollController();
   final _itemPositionListener = ItemPositionsListener.create();
+  bool _isCollapse = true;
 
-  Widget body() {
+  Widget scrollablePositionList() {
     return Container(
       child: ScrollablePositionedList.builder(
         itemScrollController: _itemScrollController,
@@ -80,19 +82,85 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Widget collapseMenuState() {
+    return Responsive.isDesktop(context) == false
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              InkWell(
+                hoverColor: Colors.transparent,
+                child: Container(
+                  height: 50,
+                  alignment: Alignment.topRight,
+                  child: Icon(
+                    _isCollapse ? Icons.menu_outlined : Icons.close_sharp,
+                    size: 40,
+                    color: Color(0xff293651),
+                  ),
+                ),
+                onTap: () {
+                  setState(() {
+                    _isCollapse = !_isCollapse;
+                  });
+                },
+              ),
+            ],
+          )
+        : Container();
+  }
+
+  Widget expandMenuState() {
+    return Responsive.isDesktop(context) == false && !_isCollapse
+        ? Positioned(
+            top: 0,
+            right: 30,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              height: 250,
+              width: 200,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: NavBar(
+                itemScrollController: _itemScrollController,
+              ),
+            ),
+          )
+        : Container();
+  }
+
+  Widget body() {
+    return Stack(
+      children: [
+        scrollablePositionList(),
+        expandMenuState(),
+      ],
+    );
+  }
+
   @override
   void initState() {
-    _itemPositionListener.itemPositions.addListener(scrollListener);
+    _itemPositionListener.itemPositions.addListener(positionListScrollListener);
     super.initState();
   }
 
   @override
   void dispose() {
-    _itemPositionListener.itemPositions.removeListener(scrollListener);
+    _itemPositionListener.itemPositions
+        .removeListener(positionListScrollListener);
     super.dispose();
   }
 
-  scrollListener() {
+  positionListScrollListener() {
     var index =
         _itemPositionListener.itemPositions.value.map((e) => e.index).toList();
     Provider.of<ItemScrollProvider>(context, listen: false)
@@ -129,7 +197,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             )
-          : null,
+          : AppBar(
+              title: collapseMenuState(),
+              backgroundColor: Colors.white,
+            ),
       body: SafeArea(
         child: body(),
       ),

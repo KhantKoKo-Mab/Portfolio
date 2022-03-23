@@ -4,9 +4,14 @@ import 'package:portfolio/constant.dart';
 import 'package:portfolio/responsive.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomeSection extends StatelessWidget {
+class HomeSection extends StatefulWidget {
   const HomeSection({Key? key}) : super(key: key);
 
+  @override
+  _HomeSectionState createState() => _HomeSectionState();
+}
+
+class _HomeSectionState extends State<HomeSection> {
   Widget profileText(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,11 +130,12 @@ class HomeSection extends StatelessWidget {
           ],
         ),
       ),
-      Positioned(
-        child: socialLinksGroup(),
-        top: 290,
-        left: 50,
-      ),
+      if (MediaQuery.of(context).size.width >= 1280)
+        Positioned(
+          child: socialLinksGroup(),
+          top: 290,
+          left: 50,
+        ),
     ]);
   }
 
@@ -139,20 +145,6 @@ class HomeSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(),
-              Container(
-                alignment: Alignment.topRight,
-                child: const Icon(
-                  Icons.menu_outlined,
-                  size: 30,
-                  color: Color(0xff293651),
-                ),
-              ),
-            ],
-          ),
           profileText(context),
           SizedBox(
             height: 30,

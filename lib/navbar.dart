@@ -27,15 +27,36 @@ class _NavBarState extends State<NavBar> {
     );
   }
 
-  Widget _spacer() {
+  Widget _hSpacer() {
     return SizedBox(
       width: 40,
     );
   }
 
-  Widget mobileNavbar() {
+  Widget _vSpacer() {
+    return SizedBox(
+      height: 20,
+    );
+  }
+
+  Widget otherNavbar(context) {
     return Container(
-      child: Text("this is mobile"),
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          menuItem(index: 0, text: 'Home'),
+          _vSpacer(),
+          menuItem(index: 1, text: 'About'),
+          _vSpacer(),
+          menuItem(index: 2, text: 'Education'),
+          _vSpacer(),
+          menuItem(index: 3, text: 'Experience'),
+          _vSpacer(),
+          menuItem(index: 4, text: 'Contact'),
+        ],
+      ),
     );
   }
 
@@ -82,20 +103,20 @@ class _NavBarState extends State<NavBar> {
     );
   }
 
-  Widget desktopAndTableNavbar(context) {
+  Widget desktopAndTabletNavbar(context) {
     return Container(
       padding: const EdgeInsets.all(15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           menuItem(index: 0, text: 'Home'),
-          _spacer(),
+          _hSpacer(),
           menuItem(index: 1, text: 'About'),
-          _spacer(),
+          _hSpacer(),
           menuItem(index: 2, text: 'Education'),
-          _spacer(),
+          _hSpacer(),
           menuItem(index: 3, text: 'Experience'),
-          _spacer(),
+          _hSpacer(),
           menuItem(index: 4, text: 'Contact'),
         ],
       ),
@@ -105,9 +126,9 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return Responsive(
-      mobile: mobileNavbar(),
-      tablet: desktopAndTableNavbar(context),
-      desktop: desktopAndTableNavbar(context),
+      desktop: desktopAndTabletNavbar(context),
+      tablet: otherNavbar(context),
+      mobile: otherNavbar(context),
     );
   }
 }
