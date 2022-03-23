@@ -12,6 +12,15 @@ class HomeSection extends StatefulWidget {
 }
 
 class _HomeSectionState extends State<HomeSection> {
+  void _launchMail() async {
+    const mailUrl = 'mailto:triplek07@gmail.com';
+    try {
+      await launch(mailUrl);
+    } catch (e) {
+      print('error email');
+    }
+  }
+
   Widget profileText(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,6 +70,7 @@ class _HomeSectionState extends State<HomeSection> {
           child: GestureDetector(
             onTap: () {
               print('click hire me');
+              _launchMail();
             },
             child: Container(
               margin: const EdgeInsets.only(top: 20.0),

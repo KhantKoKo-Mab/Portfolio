@@ -84,27 +84,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget collapseMenuState() {
     return Responsive.isDesktop(context) == false
-        ? Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              InkWell(
-                hoverColor: Colors.transparent,
-                child: Container(
-                  height: 50,
-                  alignment: Alignment.topRight,
-                  child: Icon(
-                    _isCollapse ? Icons.menu_outlined : Icons.close_sharp,
-                    size: 40,
-                    color: Color(0xff293651),
-                  ),
+        ? Container(
+            padding: const EdgeInsets.only(right: 20, top: 8),
+            alignment: Alignment.topRight,
+            child: InkWell(
+              hoverColor: Colors.transparent,
+              child: Container(
+                height: 50,
+                alignment: Alignment.topRight,
+                child: Icon(
+                  _isCollapse ? Icons.menu_outlined : Icons.close_sharp,
+                  size: 40,
+                  color: Color(0xff293651),
                 ),
-                onTap: () {
-                  setState(() {
-                    _isCollapse = !_isCollapse;
-                  });
-                },
               ),
-            ],
+              onTap: () {
+                setState(() {
+                  _isCollapse = !_isCollapse;
+                });
+              },
+            ),
           )
         : Container();
   }
@@ -113,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Responsive.isDesktop(context) == false && !_isCollapse
         ? Positioned(
             top: 0,
-            right: 30,
+            right: 20,
             child: Container(
               padding: const EdgeInsets.all(10),
               height: 250,
@@ -198,7 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             )
           : AppBar(
-              title: collapseMenuState(),
+              actions: [collapseMenuState()],
               backgroundColor: Colors.white,
             ),
       body: SafeArea(

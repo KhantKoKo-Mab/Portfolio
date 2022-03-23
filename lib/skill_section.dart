@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/responsive.dart';
 
 class SkillSection extends StatelessWidget {
@@ -63,16 +64,18 @@ class SkillSection extends StatelessWidget {
 
   Widget expertItem(context, String title) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            'assets/images/tick_mark.png',
-            width: 18,
-            height: 18,
-          ),
+          // Image.asset(
+          //   'assets/images/tick_mark.png',
+          //   width: 18,
+          //   height: 18,
+          // ),
+          Icon(FontAwesomeIcons.circleCheck,
+              color: Theme.of(context).primaryColor),
           SizedBox(
             width: 10,
           ),
