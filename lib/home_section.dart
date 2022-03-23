@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:portfolio/constant.dart';
 import 'package:portfolio/responsive.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -191,20 +192,19 @@ class HomeSection extends StatelessWidget {
       ),
       child: Column(
         children: [
-          socialLink(
-              FontAwesomeIcons.facebookF, "https://www.facebook.com/khant.ko"),
+          socialLink(FontAwesomeIcons.facebookF, kFacebookLink),
           SizedBox(
             height: 40,
           ),
-          socialLink(FontAwesomeIcons.instagram, ""),
+          socialLink(FontAwesomeIcons.instagram, kInstergramLink),
           SizedBox(
             height: 40,
           ),
-          socialLink(FontAwesomeIcons.twitter, ""),
+          socialLink(FontAwesomeIcons.twitter, kTwitterLink),
           SizedBox(
             height: 40,
           ),
-          socialLink(FontAwesomeIcons.linkedinIn, ""),
+          socialLink(FontAwesomeIcons.linkedinIn, kLinkedinLink),
         ],
       ),
     );

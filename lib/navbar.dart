@@ -1,48 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/Providers/item_scroll_provider.dart';
 import 'package:portfolio/responsive.dart';
+import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({
     Key? key,
     required this.itemScrollController,
-    required this.itemPositionListener,
   }) : super(key: key);
 
   final ItemScrollController itemScrollController;
-  final ItemPositionsListener itemPositionListener;
 
   @override
   _NavBarState createState() => _NavBarState();
 }
 
 class _NavBarState extends State<NavBar> {
-  int _selectedIndex = 0;
   int _hoverIndex = -1;
-
-  @override
-  void initState() {
-    widget.itemPositionListener.itemPositions.addListener(scrollListener);
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    widget.itemPositionListener.itemPositions.removeListener(scrollListener);
-    super.dispose();
-  }
-
-  scrollListener() {
-    var index = widget.itemPositionListener.itemPositions.value
-        .map((e) => e.index)
-        .first;
-    if (index != _selectedIndex) {
-      setState(() {
-        _selectedIndex = index;
-      });
-    }
-  }
 
   void _animateToIndex(int index) {
     widget.itemScrollController.scrollTo(
@@ -66,9 +41,6 @@ class _NavBarState extends State<NavBar> {
 
   onMenuItemClick(int index) {
     _animateToIndex(index);
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 
   onHover(int index, bool isHover) {
@@ -96,7 +68,10 @@ class _NavBarState extends State<NavBar> {
         },
         child: Text(
           text,
-          style: _selectedIndex == index || _hoverIndex == index
+          style: (_hoverIndex == index ||
+                  Provider.of<ItemScrollProvider>(context, listen: true)
+                          .getFirstItem() ==
+                      index)
               ? Theme.of(context).textTheme.headline6
               : Theme.of(context)
                   .textTheme
@@ -121,7 +96,7 @@ class _NavBarState extends State<NavBar> {
           _spacer(),
           menuItem(index: 3, text: 'Experience'),
           _spacer(),
-          menuItem(index: 3, text: 'Contact'),
+          menuItem(index: 4, text: 'Contact'),
         ],
       ),
     );

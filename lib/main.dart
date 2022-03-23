@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:portfolio/responsive.dart';
+import 'package:portfolio/Providers/item_scroll_provider.dart';
+import 'package:portfolio/footer_section.dart';
 import 'package:portfolio/services_section.dart';
 import 'package:portfolio/skill_section.dart';
 import 'package:portfolio/home_section.dart';
 import 'package:portfolio/navbar.dart';
+import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,20 +16,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Portfolio',
-      theme: ThemeData(
-          //primarySwatch: Colors.blue,
-          primaryColor: Color(0xff00a78e),
-          textTheme: TextTheme(
-            headline6: TextStyle(
-              fontFamily: 'OpenSans',
-              fontWeight: FontWeight.w600,
-              fontSize: 16,
-              color: Color(0xff00a78e),
-            ),
-          )),
-      home: MyHomePage(title: 'Khant Ko Ko'),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ItemScrollProvider()),
+      ],
+      child: MaterialApp(
+        title: 'Portfolio',
+        theme: ThemeData(
+            //primarySwatch: Colors.blue,
+            primaryColor: Color(0xff00a78e),
+            textTheme: TextTheme(
+              headline6: TextStyle(
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+                color: Color(0xff00a78e),
+              ),
+            )),
+        home: MyHomePage(title: 'Khant Ko Ko'),
+      ),
     );
   }
 }
@@ -51,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: ScrollablePositionedList.builder(
         itemScrollController: _itemScrollController,
         itemPositionsListener: _itemPositionListener,
-        itemCount: 5,
+        itemCount: 6,
         itemBuilder: (_, i) {
           if (i == 0)
             return Container(
@@ -68,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             );
+          if (i == 5) return FooterSection();
           return Container();
         },
       ),
@@ -75,10 +81,28 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void initState() {
+    _itemPositionListener.itemPositions.addListener(scrollListener);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _itemPositionListener.itemPositions.removeListener(scrollListener);
+    super.dispose();
+  }
+
+  scrollListener() {
+    var index =
+        _itemPositionListener.itemPositions.value.map((e) => e.index).toList();
+    Provider.of<ItemScrollProvider>(context, listen: false)
+        .setVisibleItems(index);
+  }
+
+  @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
     var lrMargin = mediaQuery.width / 5;
-    // print(mediaQuery);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: mediaQuery.width >= 1100
@@ -98,7 +122,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   // ),
                   NavBar(
                     itemScrollController: _itemScrollController,
-                    itemPositionListener: _itemPositionListener,
                   ),
                   Container(
                     width: lrMargin,
@@ -110,6 +133,20 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SafeArea(
         child: body(),
       ),
+      floatingActionButton:
+          Provider.of<ItemScrollProvider>(context).getLastItem() != 0
+              ? FloatingActionButton(
+                  child: Icon(Icons.arrow_upward, color: Colors.white),
+                  backgroundColor: Theme.of(context).primaryColor,
+                  onPressed: () {
+                    _itemScrollController.scrollTo(
+                      index: 0,
+                      duration: Duration(seconds: 1),
+                      curve: Curves.fastOutSlowIn,
+                    );
+                  },
+                )
+              : null,
     );
   }
 }
