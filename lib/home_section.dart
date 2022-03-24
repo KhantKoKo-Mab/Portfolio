@@ -151,7 +151,7 @@ class _HomeSectionState extends State<HomeSection> {
 
   Widget otherLayout(context) {
     return Container(
-      margin: const EdgeInsets.all(30),
+      margin: const EdgeInsets.only(top: 30, left: 30, right: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -215,6 +215,7 @@ class _HomeSectionState extends State<HomeSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       color: Colors.white,
       child: Responsive(
         desktop: desktopLayout(context),

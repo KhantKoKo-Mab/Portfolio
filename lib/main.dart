@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/Providers/item_scroll_provider.dart';
+import 'package:portfolio/education_section.dart';
 import 'package:portfolio/footer_section.dart';
 import 'package:portfolio/responsive.dart';
 import 'package:portfolio/services_section.dart';
@@ -24,16 +25,23 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Portfolio',
         theme: ThemeData(
-            //primarySwatch: Colors.blue,
-            primaryColor: Color(0xff00a78e),
-            textTheme: TextTheme(
-              headline6: TextStyle(
-                fontFamily: 'OpenSans',
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-                color: Color(0xff00a78e),
-              ),
-            )),
+          //primarySwatch: Colors.blue,
+          primaryColor: Color(0xff00a78e),
+          textTheme: TextTheme(
+            headline3: TextStyle(
+              fontFamily: 'OpenSans',
+              fontWeight: FontWeight.w600,
+              fontSize: 30,
+              color: Color(0xff00a78e),
+            ),
+            headline6: TextStyle(
+              fontFamily: 'OpenSans',
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+              color: Color(0xff00a78e),
+            ),
+          ),
+        ),
         home: MyHomePage(title: 'Khant Ko Ko'),
       ),
     );
@@ -60,11 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
         itemPositionsListener: _itemPositionListener,
         itemCount: 6,
         itemBuilder: (_, i) {
-          if (i == 0)
-            return Container(
-              width: double.infinity,
-              child: HomeSection(),
-            );
+          if (i == 0) return HomeSection();
           if (i == 1)
             return Container(
               width: double.infinity,
@@ -75,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             );
+          if (i == 2) return EducationSection();
           if (i == 5) return FooterSection();
           return Container();
         },

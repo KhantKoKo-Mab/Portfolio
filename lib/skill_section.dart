@@ -130,9 +130,7 @@ class SkillSection extends StatelessWidget {
       children: [
         Text(
           'Expertize',
-          style: Theme.of(context).textTheme.headline6!.copyWith(
-                fontSize: 30,
-                fontWeight: FontWeight.w600,
+          style: Theme.of(context).textTheme.headline3!.copyWith(
                 letterSpacing: 4,
               ),
         ),
@@ -156,7 +154,6 @@ class SkillSection extends StatelessWidget {
 
   Widget desktopLayout(context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 50),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,9 +164,7 @@ class SkillSection extends StatelessWidget {
             children: [
               Text(
                 'Skills',
-                style: Theme.of(context).textTheme.headline6!.copyWith(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w600,
+                style: Theme.of(context).textTheme.headline3!.copyWith(
                       letterSpacing: 4,
                     ),
               ),
@@ -198,7 +193,6 @@ class SkillSection extends StatelessWidget {
 
   Widget tabletLayout(context) {
     return Container(
-      margin: const EdgeInsets.all(30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center, //s
         children: [
@@ -208,9 +202,7 @@ class SkillSection extends StatelessWidget {
             children: [
               Text(
                 'Skills',
-                style: Theme.of(context).textTheme.headline6!.copyWith(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w600,
+                style: Theme.of(context).textTheme.headline3!.copyWith(
                       letterSpacing: 4,
                     ),
               ),
@@ -257,15 +249,12 @@ class SkillSection extends StatelessWidget {
 
   Widget mobileLayout(context) {
     return Container(
-      margin: const EdgeInsets.all(30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center, //s
         children: [
           Text(
             'Skills',
-            style: Theme.of(context).textTheme.headline6!.copyWith(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w600,
+            style: Theme.of(context).textTheme.headline3!.copyWith(
                   letterSpacing: 4,
                 ),
           ),
@@ -283,9 +272,7 @@ class SkillSection extends StatelessWidget {
           ),
           Text(
             'Expertize',
-            style: Theme.of(context).textTheme.headline6!.copyWith(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w600,
+            style: Theme.of(context).textTheme.headline3!.copyWith(
                   letterSpacing: 4,
                 ),
           ),
@@ -312,9 +299,7 @@ class SkillSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       //color: Color(0xfff9f9f9),
-      margin: Responsive.isDesktop(context)
-          ? const EdgeInsets.only(top: 30, bottom: 30)
-          : EdgeInsets.all(0),
+      padding: const EdgeInsets.only(top: 30, bottom: 30),
       child: Responsive(
         desktop: desktopLayout(context),
         tablet: tabletLayout(context),

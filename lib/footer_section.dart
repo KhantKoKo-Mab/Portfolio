@@ -75,7 +75,7 @@ class _FooterSectionState extends State<FooterSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(30),
+      padding: const EdgeInsets.only(top: 30, bottom: 30),
       width: double.infinity,
       child: Column(
         children: [

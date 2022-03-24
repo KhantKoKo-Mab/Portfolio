@@ -52,7 +52,7 @@ class ServicesSection extends StatelessWidget {
 
   Widget desktopLayout(context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 30),
+      // margin: EdgeInsets.symmetric(vertical: 30),
       child: Column(
         children: [
           Text(
@@ -89,7 +89,7 @@ class ServicesSection extends StatelessWidget {
 
   Widget otherLayout(context) {
     return Container(
-      margin: const EdgeInsets.all(30),
+      //margin: const EdgeInsets.all(30),
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center, //s
@@ -127,9 +127,7 @@ class ServicesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      margin: Responsive.isDesktop(context)
-          ? const EdgeInsets.only(top: 30, bottom: 30)
-          : EdgeInsets.all(0),
+      padding: const EdgeInsets.only(top: 30, bottom: 30),
       child: Responsive(
         desktop: desktopLayout(context),
         tablet: otherLayout(context),
