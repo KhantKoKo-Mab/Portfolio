@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/Providers/item_scroll_provider.dart';
 import 'package:portfolio/education_section.dart';
+import 'package:portfolio/experience_section.dart';
 import 'package:portfolio/footer_section.dart';
 import 'package:portfolio/responsive.dart';
 import 'package:portfolio/services_section.dart';
@@ -80,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             );
           if (i == 2) return EducationSection();
+          if (i == 3) return ExperienceSection();
           if (i == 5) return FooterSection();
           return Container();
         },

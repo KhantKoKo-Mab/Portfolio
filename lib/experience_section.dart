@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/responsive.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
-class EducationSection extends StatefulWidget {
-  const EducationSection({Key? key}) : super(key: key);
+class ExperienceSection extends StatefulWidget {
+  const ExperienceSection({Key? key}) : super(key: key);
 
   @override
-  _EducationSectionState createState() => _EducationSectionState();
+  _ExperienceSectionState createState() => _ExperienceSectionState();
 }
 
-class _EducationSectionState extends State<EducationSection> {
+class _ExperienceSectionState extends State<ExperienceSection> {
   String _hoverIndex = "";
 
   Widget _buildTimeline(
@@ -139,11 +139,13 @@ class _EducationSectionState extends State<EducationSection> {
           SizedBox(
             height: 10,
           ),
-          Text(dateTime,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline6!
-                  .copyWith(color: Colors.grey.shade600)),
+          Text(
+            dateTime,
+            style: Theme.of(context)
+                .textTheme
+                .headline6!
+                .copyWith(color: Colors.grey.shade600),
+          ),
           SizedBox(
             height: 10,
           ),
@@ -155,32 +157,32 @@ class _EducationSectionState extends State<EducationSection> {
   Widget desktopLayout() {
     return Column(
       children: [
-        Text('Education', style: Theme.of(context).textTheme.headline3),
+        Text('Experience', style: Theme.of(context).textTheme.headline3),
         _buildTimeline(
           context,
           indexTitle: "01",
           startWidget: timelineCard(
             content:
-                "Graduated from University of Computer Studies, Yangon (UCSY).",
+                "Develop in-house projects using Flutter, Angular, Java (Spring Boot), Oracle Database and WebLogic Server.",
             indexTitle: "01",
           ),
           endWidget: timelineWithoutCard(context,
-              title: "Computer Science",
-              subtitle: "B.C.Sc",
-              dateTime: "4th May 2013",
+              title: "Senior Business Anaylst",
+              subtitle: "Myanmar Apex Bank",
+              dateTime: "Jan 2021 - Current",
               alignment: CrossAxisAlignment.start),
         ),
         _buildTimeline(
           context,
           indexTitle: "02",
           startWidget: timelineWithoutCard(context,
-              title: "Computer Science",
-              subtitle: "B.C.Sc (Hons.)",
-              dateTime: "8th Feb 2014",
+              title: "Senior Software Engineer",
+              subtitle: "Myanmar Information Technology",
+              dateTime: "Jan 2016 - Jan 2021",
               alignment: CrossAxisAlignment.end),
           endWidget: timelineCard(
             content:
-                "Graduated from University of Computer Studies, Yangon (UCSY) with great honor.",
+                "Handling the local biggest market retail systems, ERP and making business insight, sales forcasting using Azure, Power BI and Power Apps.",
             indexTitle: "02",
           ),
         ),
@@ -189,42 +191,28 @@ class _EducationSectionState extends State<EducationSection> {
           indexTitle: "03",
           startWidget: timelineCard(
             content:
-                "After Graduating from University, received professional web developer certificate at devnet Solution Provider.",
+                "Devloping transportation management system and cheque issuing system including problem solving and customization.",
             indexTitle: "03",
           ),
           endWidget: timelineWithoutCard(context,
-              title: "Professional Web Developer",
-              subtitle: "ASP.NET Web Development",
-              dateTime: "Jan 2014",
+              title: "Junior Software Developer",
+              subtitle: "System Gear",
+              dateTime: "2014 - 2016",
               alignment: CrossAxisAlignment.start),
         ),
         _buildTimeline(
           context,
           indexTitle: "04",
           startWidget: timelineWithoutCard(context,
-              title: "Domain Driven Design Architecture",
-              subtitle: "ASP.NET Web Development",
-              dateTime: "July 2016",
+              title: "Junior Software Developer",
+              subtitle: "devnet Solution Provider",
+              dateTime: "2013 - 2014",
               alignment: CrossAxisAlignment.end),
           endWidget: timelineCard(
             content:
-                "Another Web, (Frontend & Backend) development with Domain Driven Design Architecture, certificate awarded by MCPA Yangon.",
+                "Develope ERP, retail systems and websites using ASP.Net and .Net.",
             indexTitle: "04",
           ),
-        ),
-        _buildTimeline(
-          context,
-          indexTitle: "05",
-          startWidget: timelineCard(
-            content:
-                "Achieve Microsoft SQL Server Database Administration certificate at Gusto Institute.",
-            indexTitle: "05",
-          ),
-          endWidget: timelineWithoutCard(context,
-              title: "Database Administration",
-              subtitle: "Microsoft SQL Server",
-              dateTime: "August 2019",
-              alignment: CrossAxisAlignment.start),
         ),
       ],
     );
@@ -236,69 +224,56 @@ class _EducationSectionState extends State<EducationSection> {
       children: [
         Center(
           child:
-              Text('Education', style: Theme.of(context).textTheme.headline3),
+              Text('Experience', style: Theme.of(context).textTheme.headline3),
         ),
         timelineWithoutCard(context,
-            title: "Computer Science",
-            subtitle: "B.C.Sc",
-            dateTime: "4th May 2013",
+            title: "Senior Business Anaylst",
+            subtitle: "Myanmar Apex Bank",
+            dateTime: "Jan 2021 - Current",
             alignment: CrossAxisAlignment.start),
         timelineCard(
           content:
-              "Graduated from University of Computer Studies, Yangon (UCSY)",
+              "Develop in-house projects using Flutter, Angular, Java (Spring Boot), Oracle Database and WebLogic Server.",
           indexTitle: "01",
         ),
         SizedBox(
           height: 30,
         ),
         timelineWithoutCard(context,
-            title: "Computer Science",
-            subtitle: "B.C.Sc (Hons.)",
-            dateTime: "8th Feb 2014",
+            title: "Senior Software Engineer",
+            subtitle: "Myanmar Information Technology",
+            dateTime: "Jan 2016 - Jan 2021",
             alignment: CrossAxisAlignment.start),
         timelineCard(
           content:
-              "Graduated from University of Computer Studies, Yangon (UCSY) with great honor",
+              "Handling the local biggest market retail systems, ERP and making business insight, sales forcasting using Azure, Power BI and Power Apps.",
           indexTitle: "02",
         ),
         SizedBox(
           height: 30,
         ),
         timelineWithoutCard(context,
-            title: "Professional Web Developer",
-            subtitle: "ASP.NET Web Development",
-            dateTime: "Jan 2014",
+            title: "Junior Software Developer",
+            subtitle: "System Gear",
+            dateTime: "2014 - 2016",
             alignment: CrossAxisAlignment.start),
         timelineCard(
           content:
-              "After Graduating from University, received professional web developer certificate at devnet Solution Provider.",
+              "Devloping transportation management system and cheque issuing system including problem solving and customization.",
           indexTitle: "03",
         ),
         SizedBox(
           height: 30,
         ),
         timelineWithoutCard(context,
-            title: "Domain Driven Design Architecture",
-            subtitle: "ASP.NET Web Development",
-            dateTime: "July 2016",
+            title: "Junior Software Developer",
+            subtitle: "devnet Solution Provider",
+            dateTime: "2013 - 2014",
             alignment: CrossAxisAlignment.start),
         timelineCard(
           content:
-              "Another Web, (Frontend & Backend) development with Domain Driven Design Architecture, certificate awarded by MCPA Yangon",
+              "Develope ERP, retail systems and websites using ASP.Net and .Net.",
           indexTitle: "04",
-        ),
-        SizedBox(
-          height: 30,
-        ),
-        timelineWithoutCard(context,
-            title: "Database Administration",
-            subtitle: "Microsoft SQL Server",
-            dateTime: "August 2019",
-            alignment: CrossAxisAlignment.start),
-        timelineCard(
-          content:
-              "Achieve Microsoft SQL Server Database Administration certificate at Gusto Institute.",
-          indexTitle: "05",
         ),
       ],
     );
@@ -307,6 +282,7 @@ class _EducationSectionState extends State<EducationSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       padding: const EdgeInsets.only(top: 30, bottom: 30),
       width: double.infinity,
       child: Responsive(
