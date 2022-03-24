@@ -18,28 +18,30 @@ class _FooterSectionState extends State<FooterSection> {
       onTap: () async {
         if (!await launch(url)) throw 'Could not launch $url';
       },
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.grey.shade300,
-        ),
-        child: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          onEnter: (event) {
-            setState(() {
-              _currentFocusItem = index;
-            });
-          },
-          onExit: (event) {
-            setState(() {
-              _currentFocusItem = -1;
-            });
-          },
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (event) {
+          setState(() {
+            _currentFocusItem = index;
+          });
+        },
+        onExit: (event) {
+          setState(() {
+            _currentFocusItem = -1;
+          });
+        },
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: _currentFocusItem == index
+                ? Theme.of(context).primaryColor
+                : Colors.grey.shade300,
+          ),
           child: Icon(
             icon,
             color: _currentFocusItem == index
-                ? Theme.of(context).primaryColor
+                ? Colors.white
                 : Colors.grey.shade700,
           ),
         ),
