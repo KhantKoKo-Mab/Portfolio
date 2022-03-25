@@ -5,12 +5,63 @@ import 'package:portfolio/responsive.dart';
 class SkillSection extends StatelessWidget {
   const SkillSection({Key? key}) : super(key: key);
 
+  Widget skillPercentMobile(context, title, double percent) {
+    double width = 240;
+    print(width);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start, //remove
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Container(
+            width: 150,
+            child: Text(
+              title,
+              style: TextStyle(
+                color: Color(0xff293651),
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+        Stack(
+          children: [
+            Container(
+              width: width,
+              height: 13,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade300,
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            Container(
+              width: (percent / 100) * width,
+              height: 15,
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            Center(
+              //left: width / 2,
+              child: Text(
+                '${percent.toString()}%',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
   Widget skillPercent(context, String title, double percent) {
-    double width = Responsive.isTablet(context)
-        ? 400
-        : Responsive.isMobile(context)
-            ? 250
-            : 300;
+    double width = Responsive.isTablet(context) ? 350 : 300;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center, //remove
       children: [
@@ -40,7 +91,7 @@ class SkillSection extends StatelessWidget {
             ),
             Container(
               width: (percent / 100) * width,
-              height: 13,
+              height: 15,
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(8),
@@ -69,13 +120,10 @@ class SkillSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image.asset(
-          //   'assets/images/tick_mark.png',
-          //   width: 18,
-          //   height: 18,
-          // ),
-          Icon(FontAwesomeIcons.circleCheck,
-              color: Theme.of(context).primaryColor),
+          Icon(
+            FontAwesomeIcons.circleCheck,
+            color: Theme.of(context).primaryColor,
+          ),
           SizedBox(
             width: 10,
           ),
@@ -84,7 +132,7 @@ class SkillSection extends StatelessWidget {
             textAlign: TextAlign.left,
             style: TextStyle(
               color: Color(0xff293651),
-              fontSize: 18,
+              fontSize: Responsive.isMobile(context) ? 16 : 18,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -98,7 +146,7 @@ class SkillSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        expertItem(context, 'Database Management (MSSQL)'),
+        expertItem(context, 'Database Management'),
         expertItem(context, 'Azure Cloud'),
         expertItem(context, 'Power BI'),
         expertItem(context, 'Data Centralization'),
@@ -249,6 +297,7 @@ class SkillSection extends StatelessWidget {
 
   Widget mobileLayout(context) {
     return Container(
+      margin: const EdgeInsets.all(30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center, //s
         children: [
@@ -261,12 +310,12 @@ class SkillSection extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          skillPercent(context, "C#", 85),
-          skillPercent(context, "Flutter", 70),
-          skillPercent(context, "Java", 65),
-          skillPercent(context, "Angular", 60),
-          skillPercent(context, "HTML, CSS, JS", 75),
-          skillPercent(context, "SQL", 80),
+          skillPercentMobile(context, "C#", 85),
+          skillPercentMobile(context, "Flutter", 70),
+          skillPercentMobile(context, "Java", 65),
+          skillPercentMobile(context, "Angular", 60),
+          skillPercentMobile(context, "HTML, CSS, JS", 75),
+          skillPercentMobile(context, "SQL", 80),
           SizedBox(
             height: 30,
           ),

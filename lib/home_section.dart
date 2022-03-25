@@ -1,8 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/constant.dart';
 import 'package:portfolio/responsive.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:html' as html;
 
 class HomeSection extends StatefulWidget {
   const HomeSection({Key? key}) : super(key: key);
@@ -19,6 +23,38 @@ class _HomeSectionState extends State<HomeSection> {
     } catch (e) {
       print('error email');
     }
+  }
+
+  void downloadFile(String url) {
+    html.AnchorElement anchorElement = new html.AnchorElement(href: url);
+    anchorElement.download = url;
+    anchorElement.setAttribute("download", "ResumeOfKKK.docx");
+    anchorElement.click();
+  }
+
+  Widget button(String title, VoidCallback? callback) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: callback,
+        child: Container(
+          margin: const EdgeInsets.only(top: 10.0),
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor,
+            borderRadius: BorderRadius.all(Radius.circular(6)),
+          ),
+          child: Text(
+            title,
+            style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+                letterSpacing: 1.5),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget profileText(context) {
@@ -65,31 +101,38 @@ class _HomeSectionState extends State<HomeSection> {
             height: 1.7,
           ),
         ),
-        MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: () {
-              print('click hire me');
-              _launchMail();
-            },
-            child: Container(
-              margin: const EdgeInsets.only(top: 20.0),
-              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.all(Radius.circular(6)),
+        Responsive.isDesktop(context)
+            ? Row(
+                children: [
+                  button('Hire me', _launchMail),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  button(
+                    'Download Resume',
+                    () {
+                      downloadFile(
+                          'https://triplek07.github.io/assets/assets/static/ResumeOfKKK.docx');
+                    },
+                  ),
+                ],
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  button('Hire me', _launchMail),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  button(
+                    'Download CV',
+                    () {
+                      downloadFile(
+                          'https://triplek07.github.io/assets/assets/static/ResumeOfKKK.docx');
+                    },
+                  ),
+                ],
               ),
-              child: const Text(
-                'Hire Me',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                    letterSpacing: 1.5),
-              ),
-            ),
-          ),
-        ),
       ],
     );
   }

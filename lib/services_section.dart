@@ -28,7 +28,7 @@ class ServicesSection extends StatelessWidget {
           Text(
             title,
             style: Theme.of(context).textTheme.headline6!.copyWith(
-                  fontSize: 30,
+                  fontSize: 22,
                   fontWeight: FontWeight.w600,
                   letterSpacing: 4,
                 ),
@@ -89,7 +89,7 @@ class ServicesSection extends StatelessWidget {
 
   Widget otherLayout(context) {
     return Container(
-      //margin: const EdgeInsets.all(30),
+      margin: const EdgeInsets.all(30),
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center, //s

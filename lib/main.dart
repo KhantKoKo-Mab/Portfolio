@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/Providers/item_scroll_provider.dart';
+import 'package:portfolio/contact_section.dart';
 import 'package:portfolio/education_section.dart';
 import 'package:portfolio/experience_section.dart';
 import 'package:portfolio/footer_section.dart';
@@ -82,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
             );
           if (i == 2) return EducationSection();
           if (i == 3) return ExperienceSection();
+          if (i == 4) return ContactSection();
           if (i == 5) return FooterSection();
           return Container();
         },
@@ -169,8 +172,14 @@ class _MyHomePageState extends State<MyHomePage> {
   positionListScrollListener() {
     var index =
         _itemPositionListener.itemPositions.value.map((e) => e.index).toList();
-    Provider.of<ItemScrollProvider>(context, listen: false)
-        .setVisibleItems(index);
+
+    var recentIndex =
+        Provider.of<ItemScrollProvider>(context, listen: false).visibleItems;
+
+    if (listEquals(index, recentIndex) == false) {
+      Provider.of<ItemScrollProvider>(context, listen: false)
+          .setVisibleItems(index);
+    }
   }
 
   @override
@@ -204,7 +213,9 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             )
           : AppBar(
-              actions: [collapseMenuState()],
+              actions: [
+                collapseMenuState(),
+              ],
               backgroundColor: Colors.white,
             ),
       body: SafeArea(
