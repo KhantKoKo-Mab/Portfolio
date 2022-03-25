@@ -108,10 +108,10 @@ class _FooterSectionState extends State<FooterSection> {
           ),
           Text(
             '©2022 - All Right Reserved By Khant Ko Ko',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey.shade700,
-            ),
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headline6!.copyWith(
+                  color: Colors.grey.shade700,
+                ),
           )
         ],
       ),

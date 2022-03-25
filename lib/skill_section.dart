@@ -6,109 +6,79 @@ class SkillSection extends StatelessWidget {
   const SkillSection({Key? key}) : super(key: key);
 
   Widget skillPercentMobile(context, title, double percent) {
-    double width = 240;
-    print(width);
+    var mediaQuery = MediaQuery.of(context);
+    double width = mediaQuery.size.width;
+    print(mediaQuery.size.width);
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start, //remove
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center, //remove
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Container(
-            width: 150,
-            child: Text(
-              title,
-              style: TextStyle(
-                color: Color(0xff293651),
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-        ),
-        Stack(
-          children: [
-            Container(
-              width: width,
-              height: 13,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            Container(
-              width: (percent / 100) * width,
-              height: 15,
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            Center(
-              //left: width / 2,
-              child: Text(
-                '${percent.toString()}%',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                ),
-              ),
-            ),
-          ],
-        ),
+        skillTitle(title),
+        skillPercentBar(context, percent, width),
       ],
     );
   }
 
-  Widget skillPercent(context, String title, double percent) {
-    double width = Responsive.isTablet(context) ? 350 : 300;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center, //remove
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Container(
-            width: 150,
+  Widget skillTitle(String title, {double? textWidth = double.infinity}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Container(
+        width: textWidth,
+        child: Text(
+          title,
+          textAlign: TextAlign.left,
+          style: TextStyle(
+            color: Color(0xff293651),
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget skillPercentBar(context, double percent, double barWidth) {
+    return FittedBox(
+      child: Stack(
+        children: [
+          Container(
+            width: barWidth,
+            height: 13,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+          Container(
+            width: (percent / 100) * barWidth,
+            height: 15,
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+          Positioned(
+            left: barWidth / 2,
             child: Text(
-              title,
+              '${percent.toString()}%',
               style: TextStyle(
-                color: Color(0xff293651),
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
+                color: Colors.white,
+                fontSize: 12,
               ),
             ),
           ),
-        ),
-        Stack(
-          children: [
-            Container(
-              width: width,
-              height: 13,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            Container(
-              width: (percent / 100) * width,
-              height: 15,
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            Positioned(
-              left: width / 2,
-              child: Text(
-                '${percent.toString()}%',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                ),
-              ),
-            ),
-          ],
-        ),
+        ],
+      ),
+    );
+  }
+
+  Widget skillPercent(context, String title, double percent) {
+    double width = Responsive.isTablet(context) ? 350 : 350;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center, //remove
+      children: [
+        skillTitle(title, textWidth: 150),
+        skillPercentBar(context, percent, width),
       ],
     );
   }
@@ -173,7 +143,7 @@ class SkillSection extends StatelessWidget {
 
   Widget expertizeWidget(context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
@@ -244,27 +214,21 @@ class SkillSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center, //s
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center, //s
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Skills',
-                style: Theme.of(context).textTheme.headline3!.copyWith(
-                      letterSpacing: 4,
-                    ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              skillPercent(context, "C#", 85),
-              skillPercent(context, "Flutter", 70),
-              skillPercent(context, "Java", 65),
-              skillPercent(context, "Angular", 60),
-              skillPercent(context, "HTML, CSS, JS", 75),
-              skillPercent(context, "SQL", 80),
-            ],
+          Text(
+            'Skills',
+            style: Theme.of(context).textTheme.headline3!.copyWith(
+                  letterSpacing: 4,
+                ),
           ),
+          SizedBox(
+            height: 30,
+          ),
+          skillPercent(context, "C#", 85),
+          skillPercent(context, "Flutter", 70),
+          skillPercent(context, "Java", 65),
+          skillPercent(context, "Angular", 60),
+          skillPercent(context, "HTML, CSS, JS", 75),
+          skillPercent(context, "SQL", 80),
           SizedBox(
             height: 30,
           ),
@@ -299,7 +263,7 @@ class SkillSection extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(30),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center, //s
+        crossAxisAlignment: CrossAxisAlignment.start, //s
         children: [
           Text(
             'Skills',

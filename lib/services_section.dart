@@ -7,7 +7,7 @@ class ServicesSection extends StatelessWidget {
   Widget roundedCard(context, IconData icon, String title, String subtitle) {
     return Container(
       height: 250,
-      width: 350,
+      width: 345,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade400),

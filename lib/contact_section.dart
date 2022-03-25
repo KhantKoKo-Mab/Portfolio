@@ -58,7 +58,7 @@ class _ContactSectionState extends State<ContactSection> {
               color: Colors.grey.shade400,
             ),
           ),
-          width: 340,
+          width: 345,
           height: 200,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -102,7 +102,7 @@ class _ContactSectionState extends State<ContactSection> {
             infoCard(
                 index: 0, title: "triplek07@gmail.com", icon: Icons.mail_sharp),
             SizedBox(
-              width: 30,
+              width: 20,
             ),
             infoCard(
               index: 1,
@@ -110,7 +110,7 @@ class _ContactSectionState extends State<ContactSection> {
               icon: Icons.phone_sharp,
             ),
             SizedBox(
-              width: 30,
+              width: 20,
             ),
             infoCard(
                 index: 2,

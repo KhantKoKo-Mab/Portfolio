@@ -1,11 +1,9 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/constant.dart';
 import 'package:portfolio/responsive.dart';
 import 'package:url_launcher/url_launcher.dart';
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 
 class HomeSection extends StatefulWidget {
@@ -39,18 +37,17 @@ class _HomeSectionState extends State<HomeSection> {
         onTap: callback,
         child: Container(
           margin: const EdgeInsets.only(top: 10.0),
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.all(Radius.circular(6)),
+            borderRadius: BorderRadius.all(Radius.circular(4)),
           ),
           child: Text(
             title,
-            style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-                letterSpacing: 1.5),
+            style: Theme.of(context)
+                .textTheme
+                .headline6!
+                .copyWith(color: Colors.white),
           ),
         ),
       ),
@@ -62,19 +59,12 @@ class _HomeSectionState extends State<HomeSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          'Hello I\'m',
-          style: Theme.of(context).textTheme.headline6!.copyWith(
-                fontSize: 30,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 4,
-              ),
-        ),
+        Text('Hello I\'m', style: Theme.of(context).textTheme.headline3),
         Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: const Text(
             'Khant Ko Ko',
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xff293651),
               fontSize: 50,
               fontWeight: FontWeight.w700,
@@ -85,7 +75,7 @@ class _HomeSectionState extends State<HomeSection> {
           padding: const EdgeInsets.only(top: 20.0, bottom: 20),
           child: const Text(
             'Professional Full Stack Developer',
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xff293651),
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -101,38 +91,24 @@ class _HomeSectionState extends State<HomeSection> {
             height: 1.7,
           ),
         ),
-        Responsive.isDesktop(context)
-            ? Row(
-                children: [
-                  button('Hire me', _launchMail),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  button(
-                    'Download Resume',
-                    () {
-                      downloadFile(
-                          'https://triplek07.github.io/assets/assets/static/ResumeOfKKK.docx');
-                    },
-                  ),
-                ],
-              )
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  button('Hire me', _launchMail),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  button(
-                    'Download CV',
-                    () {
-                      downloadFile(
-                          'https://triplek07.github.io/assets/assets/static/ResumeOfKKK.docx');
-                    },
-                  ),
-                ],
-              ),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
+            button('Hire me', _launchMail),
+            SizedBox(
+              width: 10,
+            ),
+            button(
+              'Download CV',
+              () {
+                downloadFile(
+                    'https://triplek07.github.io/assets/assets/static/ResumeOfKKK.docx');
+              },
+            ),
+          ],
+        )
       ],
     );
   }
@@ -187,7 +163,7 @@ class _HomeSectionState extends State<HomeSection> {
         Positioned(
           child: socialLinksGroup(),
           top: 290,
-          left: 50,
+          left: 30,
         ),
     ]);
   }
