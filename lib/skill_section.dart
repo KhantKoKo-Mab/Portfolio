@@ -1,9 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/responsive.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
-class SkillSection extends StatelessWidget {
+class SkillSection extends StatefulWidget {
   const SkillSection({Key? key}) : super(key: key);
+
+  @override
+  _SkillSectionState createState() => _SkillSectionState();
+}
+
+class _SkillSectionState extends State<SkillSection>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  bool _isDisposed = false;
+
+  @override
+  void initState() {
+    _animationController = new AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1200));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _animationController.dispose();
+    _isDisposed = true;
+  }
 
   Widget skillPercentMobile(context, title, double percent) {
     var mediaQuery = MediaQuery.of(context);
@@ -38,36 +62,52 @@ class SkillSection extends StatelessWidget {
   }
 
   Widget skillPercentBar(context, double percent, double barWidth) {
-    return FittedBox(
-      child: Stack(
-        children: [
-          Container(
-            width: barWidth,
-            height: 13,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade300,
-              borderRadius: BorderRadius.circular(8),
+    return VisibilityDetector(
+      key: UniqueKey(),
+      onVisibilityChanged: (visibilityInfo) {
+        if (_isDisposed == false) {
+          _animationController.forward();
+        }
+      },
+      child: AnimatedBuilder(
+        animation: _animationController,
+        builder: (context, child) {
+          return FittedBox(
+            child: Stack(
+              children: [
+                Container(
+                  width: barWidth,
+                  height: 13,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                Container(
+                  width: (percent *
+                          (_isDisposed ? 1 : _animationController.value) /
+                          100) *
+                      barWidth,
+                  height: 15,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                Positioned(
+                  left: barWidth / 2,
+                  child: Text(
+                    '${(percent * (_isDisposed ? 1 : _animationController.value)).toStringAsFixed(0)}%',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-          Container(
-            width: (percent / 100) * barWidth,
-            height: 15,
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          Positioned(
-            left: barWidth / 2,
-            child: Text(
-              '${percent.toString()}%',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-              ),
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
@@ -177,7 +217,7 @@ class SkillSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(

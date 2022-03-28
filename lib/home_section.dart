@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/constant.dart';
 import 'package:portfolio/responsive.dart';
+import 'package:show_up_animation/show_up_animation.dart';
 import 'package:url_launcher/url_launcher.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
@@ -59,71 +60,115 @@ class _HomeSectionState extends State<HomeSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Hello I\'m', style: Theme.of(context).textTheme.headline3),
-        Padding(
-          padding: const EdgeInsets.only(top: 20.0),
-          child: const Text(
-            'Khant Ko Ko',
-            style: const TextStyle(
-              color: Color(0xff293651),
-              fontSize: 50,
-              fontWeight: FontWeight.w700,
+        ShowUpAnimation(
+          delayStart: Duration(milliseconds: 300),
+          animationDuration: Duration(seconds: 1),
+          curve: Curves.ease,
+          direction: Direction.vertical,
+          offset: 1,
+          child:
+              Text('Hello I\'m', style: Theme.of(context).textTheme.headline3),
+        ),
+        ShowUpAnimation(
+          delayStart: Duration(milliseconds: 500),
+          animationDuration: Duration(seconds: 1),
+          curve: Curves.ease,
+          direction: Direction.vertical,
+          offset: 1,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: const Text(
+              'Khant Ko Ko',
+              style: const TextStyle(
+                color: Color(0xff293651),
+                fontSize: 50,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20.0, bottom: 20),
-          child: const Text(
-            'Professional Full Stack Developer',
-            style: const TextStyle(
-              color: Color(0xff293651),
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
+        ShowUpAnimation(
+          delayStart: Duration(milliseconds: 700),
+          animationDuration: Duration(seconds: 1),
+          curve: Curves.ease,
+          direction: Direction.vertical,
+          offset: 1,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20.0, bottom: 20),
+            child: const Text(
+              'Professional Full Stack Developer',
+              style: const TextStyle(
+                color: Color(0xff293651),
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ),
-        Text(
-          'Innovative, task-driven professional with 7+ years of experience in \nWindows, Web, Mobile development across all site of industries.\nEquipped with a record of success in consistently identifying and providing the teachnological needs of companies through ingenious innovation.',
-          style: const TextStyle(
-            color: Color(0xff293651),
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            height: 1.7,
+        ShowUpAnimation(
+          delayStart: Duration(milliseconds: 900),
+          animationDuration: Duration(seconds: 1),
+          curve: Curves.ease,
+          direction: Direction.vertical,
+          offset: 1,
+          child: Text(
+            'Innovative, task-driven professional with 7+ years of experience in \nWindows, Web, Mobile development across all site of industries.\nEquipped with a record of success in consistently identifying and providing the teachnological needs of companies through ingenious innovation.',
+            style: const TextStyle(
+              color: Color(0xff293651),
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              height: 1.7,
+            ),
           ),
         ),
         SizedBox(
           height: 10,
         ),
-        Row(
-          children: [
-            button('Hire me', _launchMail),
-            SizedBox(
-              width: 10,
-            ),
-            button(
-              'Download CV',
-              () {
-                downloadFile(
-                    'https://triplek07.github.io/assets/assets/static/ResumeOfKKK.docx');
-              },
-            ),
-          ],
+        ShowUpAnimation(
+          delayStart: Duration(milliseconds: 1100),
+          animationDuration: Duration(seconds: 1),
+          curve: Curves.ease,
+          direction: Direction.vertical,
+          offset: 1,
+          child: Row(
+            children: [
+              button('Hire me', _launchMail),
+              SizedBox(
+                width: 10,
+              ),
+              button(
+                'Download CV',
+                () {
+                  downloadFile(
+                      'https://triplek07.github.io/assets/assets/static/ResumeOfKKK.docx');
+                },
+              ),
+            ],
+          ),
         )
       ],
     );
   }
 
   Widget profileImage(context) {
-    return Container(
-      margin: EdgeInsets.only(top: Responsive.isDesktop(context) ? 130 : 0),
-      height: Responsive.isDesktop(context)
-          ? (1007 - (130 + MediaQuery.of(context).padding.top + kToolbarHeight))
-          : 600,
-      child: Image.asset(
-        'assets/images/hero.png',
-        width: 550,
-        height: 825,
-        fit: Responsive.isDesktop(context) ? BoxFit.cover : BoxFit.scaleDown,
+    return ShowUpAnimation(
+      delayStart: Duration(milliseconds: 1300),
+      animationDuration: Duration(seconds: 2),
+      curve: Curves.ease,
+      direction: Direction.horizontal,
+      offset: 1,
+      child: Container(
+        margin: EdgeInsets.only(top: Responsive.isDesktop(context) ? 130 : 0),
+        height: Responsive.isDesktop(context)
+            ? (1007 -
+                (130 + MediaQuery.of(context).padding.top + kToolbarHeight))
+            : 600,
+        child: Image.asset(
+          'assets/images/hero.png',
+          width: 550,
+          height: 825,
+          fit: Responsive.isDesktop(context) ? BoxFit.cover : BoxFit.scaleDown,
+        ),
       ),
     );
   }

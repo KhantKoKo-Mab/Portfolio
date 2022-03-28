@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/animation_helper/fade_slide_transaction.dart';
 import 'package:portfolio/icon_indicator.dart';
 import 'package:portfolio/responsive.dart';
 import 'package:timeline_tile/timeline_tile.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class EducationSection extends StatefulWidget {
   const EducationSection({Key? key}) : super(key: key);
@@ -10,8 +12,26 @@ class EducationSection extends StatefulWidget {
   _EducationSectionState createState() => _EducationSectionState();
 }
 
-class _EducationSectionState extends State<EducationSection> {
+class _EducationSectionState extends State<EducationSection>
+    with SingleTickerProviderStateMixin {
   String _hoverIndex = "";
+
+  late AnimationController _animationController;
+  bool _isDispose = false;
+
+  @override
+  void initState() {
+    _animationController =
+        new AnimationController(vsync: this, duration: Duration(seconds: 2));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _animationController.dispose();
+    _isDispose = true;
+  }
 
   Widget _buildTimeline(
     context, {
@@ -82,26 +102,48 @@ class _EducationSectionState extends State<EducationSection> {
     Color textColor =
         _hoverIndex == indexTitle ? Colors.white : Colors.grey.shade600;
 
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 30),
-      padding: const EdgeInsets.all(20),
-      child: Text(
-        content,
-        style: Theme.of(context).textTheme.headline6!.copyWith(
-              color: textColor,
-            ),
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        color: fillColor,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
+    int index = int.parse(indexTitle);
+    double _startAnimation = 0.1 * index;
+    double _endAnimation = _startAnimation + 0.5;
+
+    return VisibilityDetector(
+      key: UniqueKey(),
+      onVisibilityChanged: (info) {
+        if (!_isDispose) {
+          _animationController.forward();
+        }
+      },
+      child: FadeSlideTransaction(
+        animationController: _animationController,
+        curve: Interval(
+          _startAnimation,
+          _endAnimation,
+          curve: Curves.ease,
+        ),
+        direction: Direction.horizontal,
+        offset: 0.1,
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 30),
+          padding: const EdgeInsets.all(20),
+          child: Text(
+            content,
+            style: Theme.of(context).textTheme.headline6!.copyWith(
+                  color: textColor,
+                ),
           ),
-        ],
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            color: fillColor,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
