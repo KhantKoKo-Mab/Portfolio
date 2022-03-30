@@ -77,7 +77,7 @@ class _SkillSectionState extends State<SkillSection>
               children: [
                 Container(
                   width: barWidth,
-                  height: 13,
+                  height: 15,
                   decoration: BoxDecoration(
                     color: Colors.grey.shade300,
                     borderRadius: BorderRadius.circular(8),
