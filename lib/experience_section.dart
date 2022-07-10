@@ -169,7 +169,7 @@ class _ExperienceSectionState extends State<ExperienceSection> {
           ),
           endWidget: timelineWithoutCard(context,
               title: "Senior Business Anaylst",
-              subtitle: "Myanmar Apex Bank",
+              subtitle: "Myanma Apex Bank",
               dateTime: "Jan 2021 - Current",
               alignment: CrossAxisAlignment.start),
         ),
@@ -183,7 +183,7 @@ class _ExperienceSectionState extends State<ExperienceSection> {
               alignment: CrossAxisAlignment.end),
           endWidget: timelineCard(
             content:
-                "Handling the local biggest market retail systems, ERP and making business insight, sales forcasting using Azure, Power BI and Power Apps.",
+                "Handle and support the largest local market retail systems, ERP and making business insight, sales forcasting using Azure, Power BI and Power Apps.",
             indexTitle: "02",
           ),
         ),
@@ -192,7 +192,7 @@ class _ExperienceSectionState extends State<ExperienceSection> {
           indexTitle: "03",
           startWidget: timelineCard(
             content:
-                "Devloping transportation management system and cheque issuing system including problem solving and customization.",
+                "Develop transportation management system and cheque issuing system including problem solving and customization.",
             indexTitle: "03",
           ),
           endWidget: timelineWithoutCard(context,
@@ -211,7 +211,7 @@ class _ExperienceSectionState extends State<ExperienceSection> {
               alignment: CrossAxisAlignment.end),
           endWidget: timelineCard(
             content:
-                "Develope ERP, retail systems and websites using ASP.Net and .Net.",
+                "Develop ERP, retail systems and websites using ASP.Net and .Net.",
             indexTitle: "04",
           ),
         ),
@@ -229,7 +229,7 @@ class _ExperienceSectionState extends State<ExperienceSection> {
         ),
         timelineWithoutCard(context,
             title: "Senior Business Anaylst",
-            subtitle: "Myanmar Apex Bank",
+            subtitle: "Myanma Apex Bank",
             dateTime: "Jan 2021 - Current",
             alignment: CrossAxisAlignment.start),
         timelineCard(
@@ -247,7 +247,7 @@ class _ExperienceSectionState extends State<ExperienceSection> {
             alignment: CrossAxisAlignment.start),
         timelineCard(
           content:
-              "Handling the local biggest market retail systems, ERP and making business insight, sales forcasting using Azure, Power BI and Power Apps.",
+              "Handle and support the largest local market retail systems, ERP and making business insight, sales forcasting using Azure, Power BI and Power Apps.",
           indexTitle: "02",
         ),
         SizedBox(
@@ -260,7 +260,7 @@ class _ExperienceSectionState extends State<ExperienceSection> {
             alignment: CrossAxisAlignment.start),
         timelineCard(
           content:
-              "Devloping transportation management system and cheque issuing system including problem solving and customization.",
+              "Develop transportation management system and cheque issuing system including problem solving and customization.",
           indexTitle: "03",
         ),
         SizedBox(
@@ -273,7 +273,7 @@ class _ExperienceSectionState extends State<ExperienceSection> {
             alignment: CrossAxisAlignment.start),
         timelineCard(
           content:
-              "Develope ERP, retail systems and websites using ASP.Net and .Net.",
+              "Develop ERP, retail systems and websites using ASP.Net and .Net.",
           indexTitle: "04",
         ),
       ],

@@ -1,14 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/responsive.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
-class SkillSection extends StatelessWidget {
+class SkillSection extends StatefulWidget {
   const SkillSection({Key? key}) : super(key: key);
+
+  @override
+  _SkillSectionState createState() => _SkillSectionState();
+}
+
+class _SkillSectionState extends State<SkillSection>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _skillAnimationController;
+  // late Animation _animation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Duration _duration = Duration(milliseconds: 1500);
+    _skillAnimationController =
+        new AnimationController(vsync: this, duration: _duration);
+
+    // _animation = new Tween(begin: 0, end: 1).animate(_skillAnimationController);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    //_skillAnimationController.dispose();
+  }
 
   Widget skillPercentMobile(context, title, double percent) {
     var mediaQuery = MediaQuery.of(context);
     double width = mediaQuery.size.width;
-    print(mediaQuery.size.width);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center, //remove
@@ -38,36 +65,50 @@ class SkillSection extends StatelessWidget {
   }
 
   Widget skillPercentBar(context, double percent, double barWidth) {
-    return FittedBox(
-      child: Stack(
-        children: [
-          Container(
-            width: barWidth,
-            height: 13,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade300,
-              borderRadius: BorderRadius.circular(8),
+    return VisibilityDetector(
+      key: UniqueKey(),
+      onVisibilityChanged: (VisibilityInfo info) {
+        // var visiblePercentage = info.visibleFraction * 100;
+        // debugPrint('Widget ${info.key} is $visiblePercentage% visible');
+        _skillAnimationController.forward();
+      },
+      child: AnimatedBuilder(
+        animation: _skillAnimationController,
+        builder: (BuildContext context, Widget? child) {
+          return FittedBox(
+            child: Stack(
+              children: [
+                Container(
+                  width: barWidth,
+                  height: 13,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                Container(
+                  width: ((percent * _skillAnimationController.value) / 100) *
+                      barWidth,
+                  height: 15,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                Positioned(
+                  left: barWidth / 2,
+                  child: Text(
+                    '${(percent * _skillAnimationController.value).toStringAsFixed(0)}%',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-          Container(
-            width: (percent / 100) * barWidth,
-            height: 15,
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          Positioned(
-            left: barWidth / 2,
-            child: Text(
-              '${percent.toString()}%',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-              ),
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

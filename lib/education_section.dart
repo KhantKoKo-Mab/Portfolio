@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/icon_indicator.dart';
 import 'package:portfolio/responsive.dart';
 import 'package:timeline_tile/timeline_tile.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class EducationSection extends StatefulWidget {
   const EducationSection({Key? key}) : super(key: key);
@@ -10,8 +11,19 @@ class EducationSection extends StatefulWidget {
   _EducationSectionState createState() => _EducationSectionState();
 }
 
-class _EducationSectionState extends State<EducationSection> {
+class _EducationSectionState extends State<EducationSection>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+
   String _hoverIndex = "";
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animationController = new AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1500));
+  }
 
   Widget _buildTimeline(
     context, {
@@ -154,80 +166,94 @@ class _EducationSectionState extends State<EducationSection> {
   }
 
   Widget desktopLayout() {
-    return Column(
-      children: [
-        Text('Education', style: Theme.of(context).textTheme.headline3),
-        _buildTimeline(
-          context,
-          indexTitle: "01",
-          startWidget: timelineCard(
-            content:
-                "Graduated from University of Computer Studies, Yangon (UCSY).",
-            indexTitle: "01",
-          ),
-          endWidget: timelineWithoutCard(context,
-              title: "Computer Science",
-              subtitle: "B.C.Sc",
-              dateTime: "4th May 2013",
-              alignment: CrossAxisAlignment.start),
-        ),
-        _buildTimeline(
-          context,
-          indexTitle: "02",
-          startWidget: timelineWithoutCard(context,
-              title: "Computer Science",
-              subtitle: "B.C.Sc (Hons.)",
-              dateTime: "8th Feb 2014",
-              alignment: CrossAxisAlignment.end),
-          endWidget: timelineCard(
-            content:
-                "Graduated from University of Computer Studies, Yangon (UCSY) with great honor.",
-            indexTitle: "02",
-          ),
-        ),
-        _buildTimeline(
-          context,
-          indexTitle: "03",
-          startWidget: timelineCard(
-            content:
-                "After Graduating from University, received professional web developer certificate at devnet Solution Provider.",
-            indexTitle: "03",
-          ),
-          endWidget: timelineWithoutCard(context,
-              title: "Professional Web Developer",
-              subtitle: "ASP.NET Web Development",
-              dateTime: "Jan 2014",
-              alignment: CrossAxisAlignment.start),
-        ),
-        _buildTimeline(
-          context,
-          indexTitle: "04",
-          startWidget: timelineWithoutCard(context,
-              title: "Domain Driven Design Architecture",
-              subtitle: "ASP.NET Web Development",
-              dateTime: "July 2016",
-              alignment: CrossAxisAlignment.end),
-          endWidget: timelineCard(
-            content:
-                "Another Web, (Frontend & Backend) development with Domain Driven Design Architecture, certificate awarded by MCPA Yangon.",
-            indexTitle: "04",
-          ),
-        ),
-        _buildTimeline(
-          context,
-          indexTitle: "05",
-          startWidget: timelineCard(
-            content:
-                "Achieve Microsoft SQL Server Database Administration certificate at Gusto Institute.",
-            indexTitle: "05",
-          ),
-          endWidget: timelineWithoutCard(context,
-              title: "Database Administration",
-              subtitle: "Microsoft SQL Server",
-              dateTime: "August 2019",
-              alignment: CrossAxisAlignment.start),
-        ),
-      ],
+    return VisibilityDetector(
+      key: UniqueKey(),
+      onVisibilityChanged: (info) {
+        _animationController.forward();
+      },
+      child: AnimatedBuilder(
+        animation: _animationController,
+        builder: (context, child) {
+          return Opacity(
+            opacity: _animationController.value,
+            child: Column(
+              children: [
+                Text('Education', style: Theme.of(context).textTheme.headline3),
+                _buildTimeline(
+                  context,
+                  indexTitle: "01",
+                  startWidget: timelineCard(
+                    content:
+                        "Graduated from University of Computer Studies, Yangon (UCSY).",
+                    indexTitle: "01",
+                  ),
+                  endWidget: timelineWithoutCard(context,
+                      title: "Computer Science",
+                      subtitle: "B.C.Sc",
+                      dateTime: "4th May 2013",
+                      alignment: CrossAxisAlignment.start),
+                ),
+                _buildTimeline(
+                  context,
+                  indexTitle: "02",
+                  startWidget: timelineWithoutCard(context,
+                      title: "Computer Science",
+                      subtitle: "B.C.Sc (Hons.)",
+                      dateTime: "8th Feb 2014",
+                      alignment: CrossAxisAlignment.end),
+                  endWidget: timelineCard(
+                    content:
+                        "Graduated from University of Computer Studies, Yangon (UCSY) with great honor.",
+                    indexTitle: "02",
+                  ),
+                ),
+                _buildTimeline(
+                  context,
+                  indexTitle: "03",
+                  startWidget: timelineCard(
+                    content:
+                        "After Graduating from University, received professional web developer certificate at devnet Solution Provider.",
+                    indexTitle: "03",
+                  ),
+                  endWidget: timelineWithoutCard(context,
+                      title: "Professional Web Developer",
+                      subtitle: "ASP.NET Web Development",
+                      dateTime: "Jan 2014",
+                      alignment: CrossAxisAlignment.start),
+                ),
+                _buildTimeline(
+                  context,
+                  indexTitle: "04",
+                  startWidget: timelineWithoutCard(context,
+                      title: "Domain Driven Design Architecture",
+                      subtitle: "ASP.NET Web Development",
+                      dateTime: "July 2016",
+                      alignment: CrossAxisAlignment.end),
+                  endWidget: timelineCard(
+                    content:
+                        "Another Web, (Frontend & Backend) development with Domain Driven Design Architecture, certificate awarded by MCPA Yangon.",
+                    indexTitle: "04",
+                  ),
+                ),
+                _buildTimeline(
+                  context,
+                  indexTitle: "05",
+                  startWidget: timelineCard(
+                    content:
+                        "Achieve Microsoft SQL Server Database Administration certificate at Gusto Institute.",
+                    indexTitle: "05",
+                  ),
+                  endWidget: timelineWithoutCard(context,
+                      title: "Database Administration",
+                      subtitle: "Microsoft SQL Server",
+                      dateTime: "August 2019",
+                      alignment: CrossAxisAlignment.start),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 

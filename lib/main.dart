@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ItemScrollProvider()),
       ],
       child: MaterialApp(
-        title: 'Portfolio',
+        title: "Khant Ko Ko's Portfolio",
         theme: ThemeData(
           //primarySwatch: Colors.blue,
           primaryColor: Color(0xff00a78e),
@@ -164,8 +164,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void dispose() {
-    _itemPositionListener.itemPositions
-        .removeListener(positionListScrollListener);
+    // _itemPositionListener.itemPositions
+    //     .removeListener(positionListScrollListener);
     super.dispose();
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:portfolio/AnimationHelper/fade_slide_animated_widget.dart';
 import 'package:portfolio/constant.dart';
 import 'package:portfolio/responsive.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -13,7 +14,82 @@ class HomeSection extends StatefulWidget {
   _HomeSectionState createState() => _HomeSectionState();
 }
 
-class _HomeSectionState extends State<HomeSection> {
+class _HomeSectionState extends State<HomeSection>
+    with TickerProviderStateMixin {
+  late AnimationController _helloTextController;
+  late AnimationController _nameTextController;
+  late AnimationController _jobTextController;
+  late AnimationController _introTextController;
+  late AnimationController _buttonController;
+  late AnimationController _imageController;
+
+  @override
+  void initState() {
+    super.initState();
+    debugPrint('home section build');
+
+    Duration _duration = new Duration(milliseconds: 800);
+    _helloTextController =
+        new AnimationController(vsync: this, duration: _duration);
+    _nameTextController =
+        new AnimationController(vsync: this, duration: _duration);
+    _jobTextController =
+        new AnimationController(vsync: this, duration: _duration);
+    _introTextController =
+        new AnimationController(vsync: this, duration: _duration);
+    _buttonController =
+        new AnimationController(vsync: this, duration: _duration);
+    _imageController = new AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1500));
+
+    if (mounted) animate();
+  }
+
+  animate() async {
+    Duration _delayDuration = new Duration(milliseconds: 300);
+
+    _helloTextController.forward();
+    await Future.delayed(_delayDuration, () {
+      _nameTextController.forward();
+    });
+    await Future.delayed(_delayDuration, () {
+      _jobTextController.forward();
+    });
+
+    await Future.delayed(_delayDuration, () {
+      _introTextController.forward();
+    });
+
+    await Future.delayed(_delayDuration, () {
+      _buttonController.forward();
+    });
+    await Future.delayed(Duration(milliseconds: 700), () {
+      _imageController.forward();
+    });
+  }
+
+  @override
+  void dispose() {
+    _helloTextController.stop();
+    _helloTextController.dispose();
+
+    _nameTextController.stop();
+    _nameTextController.dispose();
+
+    _jobTextController.stop();
+    _jobTextController.dispose();
+
+    _introTextController.stop();
+    _introTextController.dispose();
+
+    _buttonController.stop();
+    _buttonController.dispose();
+
+    _imageController.stop();
+    _imageController.dispose();
+    super.dispose();
+  }
+
   void _launchMail() async {
     const mailUrl = 'mailto:triplek07@gmail.com';
     try {
@@ -24,10 +100,16 @@ class _HomeSectionState extends State<HomeSection> {
   }
 
   void downloadFile(String url) {
-    html.AnchorElement anchorElement = new html.AnchorElement(href: url);
-    anchorElement.download = url;
-    anchorElement.setAttribute("download", "ResumeOfKKK.docx");
-    anchorElement.click();
+    // html.AnchorElement anchorElement = new html.AnchorElement(href: url);
+    // anchorElement.download = url;
+    // anchorElement.setAttribute("download", "ResumeOfKKK.docx");
+    // anchorElement.click();
+
+    //need import 'dart:js' as js;
+    //js.context.callMethod('open', [url]);
+
+    //need import 'dart:html' as html;
+    html.window.open(url, 'new tab');
   }
 
   Widget button(String title, VoidCallback? callback) {
@@ -55,75 +137,112 @@ class _HomeSectionState extends State<HomeSection> {
   }
 
   Widget profileText(context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('Hello I\'m', style: Theme.of(context).textTheme.headline3),
-        Padding(
-          padding: const EdgeInsets.only(top: 20.0),
-          child: const Text(
-            'Khant Ko Ko',
-            style: const TextStyle(
-              color: Color(0xff293651),
-              fontSize: 50,
-              fontWeight: FontWeight.w700,
+    return Container(
+      margin: EdgeInsets.only(top: Responsive.isDesktop(context) ? 280 : 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          FadeSlideAnimatedWidget(
+            controller: _helloTextController,
+            direction: SLIDE_Direction.TOP,
+            slideValue: 20,
+            widget:
+                Text("Hello I'm", style: Theme.of(context).textTheme.headline3),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: FadeSlideAnimatedWidget(
+              controller: _nameTextController,
+              direction: SLIDE_Direction.TOP,
+              slideValue: 20,
+              widget: const Text(
+                'Khant Ko Ko',
+                style: const TextStyle(
+                  color: Color(0xff293651),
+                  fontSize: 50,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20.0, bottom: 20),
-          child: const Text(
-            'Professional Full Stack Developer',
-            style: const TextStyle(
-              color: Color(0xff293651),
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0, bottom: 20),
+            child: FadeSlideAnimatedWidget(
+              controller: _jobTextController,
+              direction: SLIDE_Direction.TOP,
+              slideValue: 20,
+              widget: const Text(
+                'Professional Software Engineer',
+                style: const TextStyle(
+                  color: Color(0xff293651),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
           ),
-        ),
-        Text(
-          'Innovative, task-driven professional with 7+ years of experience in \nWindows, Web, Mobile development across all site of industries.\nEquipped with a record of success in consistently identifying and providing the teachnological needs of companies through ingenious innovation.',
-          style: const TextStyle(
-            color: Color(0xff293651),
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            height: 1.7,
+          FadeSlideAnimatedWidget(
+            controller: _introTextController,
+            direction: SLIDE_Direction.TOP,
+            slideValue: 20,
+            widget: Text(
+              'Innovative, task-driven professional with 7+ years of experience in \nWindows, Web, Mobile development across all site of industries.\nEquipped with a record of success in consistently identifying and providing the technological needs of companies through ingenious innovation.',
+              style: const TextStyle(
+                color: Color(0xff293651),
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                height: 1.7,
+              ),
+            ),
           ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Row(
-          children: [
-            button('Hire me', _launchMail),
-            SizedBox(
-              width: 10,
+          SizedBox(
+            height: 10,
+          ),
+          FadeSlideAnimatedWidget(
+            controller: _buttonController,
+            direction: SLIDE_Direction.TOP,
+            slideValue: 20,
+            widget: Row(
+              children: [
+                button('Hire me', _launchMail),
+                SizedBox(
+                  width: 10,
+                ),
+                button(
+                  'Download CV',
+                  () {
+                    // downloadFile(
+                    //     'https://triplek07.github.io/assets/assets/static/ResumeOfKKK.docx');
+                    downloadFile(
+                        "https://triplek07.github.io/assets/assets/static/Khant%20Ko%20Ko's%20Resume.pdf");
+                  },
+                ),
+              ],
             ),
-            button(
-              'Download CV',
-              () {
-                downloadFile(
-                    'https://triplek07.github.io/assets/assets/static/ResumeOfKKK.docx');
-              },
-            ),
-          ],
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 
   Widget profileImage(context) {
-    return Container(
-      margin: EdgeInsets.only(top: Responsive.isDesktop(context) ? 130 : 0),
-      height: Responsive.isDesktop(context)
-          ? (1007 - (130 + MediaQuery.of(context).padding.top + kToolbarHeight))
-          : 600,
-      child: Image.asset(
-        'assets/images/hero.png',
-        width: 550,
-        height: 825,
-        fit: Responsive.isDesktop(context) ? BoxFit.cover : BoxFit.scaleDown,
+    return FadeSlideAnimatedWidget(
+      controller: _imageController,
+      direction: SLIDE_Direction.NONE,
+      slideValue: 0,
+      widget: Container(
+        margin: EdgeInsets.only(top: Responsive.isDesktop(context) ? 130 : 0),
+        height: Responsive.isDesktop(context)
+            ? (1007 -
+                (130 + MediaQuery.of(context).padding.top + kToolbarHeight))
+            : 600,
+        child: Image.asset(
+          'assets/images/hero.png',
+          width: 550,
+          height: 825,
+          fit: Responsive.isDesktop(context) ? BoxFit.cover : BoxFit.scaleDown,
+        ),
       ),
     );
   }
@@ -146,7 +265,7 @@ class _HomeSectionState extends State<HomeSection> {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               width: 500,
@@ -202,31 +321,36 @@ class _HomeSectionState extends State<HomeSection> {
   }
 
   Widget socialLinksGroup() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.grey.shade400,
+    return FadeSlideAnimatedWidget(
+      controller: _imageController,
+      direction: SLIDE_Direction.NONE,
+      slideValue: 0,
+      widget: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.grey.shade400,
+          ),
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.transparent,
         ),
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.transparent,
-      ),
-      child: Column(
-        children: [
-          socialLink(FontAwesomeIcons.facebookF, kFacebookLink),
-          SizedBox(
-            height: 40,
-          ),
-          socialLink(FontAwesomeIcons.instagram, kInstergramLink),
-          SizedBox(
-            height: 40,
-          ),
-          socialLink(FontAwesomeIcons.twitter, kTwitterLink),
-          SizedBox(
-            height: 40,
-          ),
-          socialLink(FontAwesomeIcons.linkedinIn, kLinkedinLink),
-        ],
+        child: Column(
+          children: [
+            socialLink(FontAwesomeIcons.facebookF, kFacebookLink),
+            SizedBox(
+              height: 40,
+            ),
+            socialLink(FontAwesomeIcons.instagram, kInstergramLink),
+            SizedBox(
+              height: 40,
+            ),
+            socialLink(FontAwesomeIcons.twitter, kTwitterLink),
+            SizedBox(
+              height: 40,
+            ),
+            socialLink(FontAwesomeIcons.linkedinIn, kLinkedinLink),
+          ],
+        ),
       ),
     );
   }
