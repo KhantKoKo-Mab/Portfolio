@@ -169,7 +169,9 @@ class _EducationSectionState extends State<EducationSection>
     return VisibilityDetector(
       key: UniqueKey(),
       onVisibilityChanged: (info) {
-        _animationController.forward();
+        if (mounted) {
+          _animationController.forward();
+        }
       },
       child: AnimatedBuilder(
         animation: _animationController,
@@ -240,7 +242,7 @@ class _EducationSectionState extends State<EducationSection>
                   indexTitle: "05",
                   startWidget: timelineCard(
                     content:
-                        "Achieve Microsoft SQL Server Database Administration certificate at Gusto Institute.",
+                        "Achieved Microsoft SQL Server Database Administration certificate at Gusto Institute.",
                     indexTitle: "05",
                   ),
                   endWidget: timelineWithoutCard(context,
@@ -324,7 +326,7 @@ class _EducationSectionState extends State<EducationSection>
             alignment: CrossAxisAlignment.start),
         timelineCard(
           content:
-              "Achieve Microsoft SQL Server Database Administration certificate at Gusto Institute.",
+              "Achieved Microsoft SQL Server Database Administration certificate at Gusto Institute.",
           indexTitle: "05",
         ),
       ],

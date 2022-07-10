@@ -183,7 +183,7 @@ class _ExperienceSectionState extends State<ExperienceSection> {
               alignment: CrossAxisAlignment.end),
           endWidget: timelineCard(
             content:
-                "Handle and support the largest local market retail systems, ERP and making business insight, sales forcasting using Azure, Power BI and Power Apps.",
+                "Handle and support reliable solutions through innovative technologies for large local retail systems and ERP.\nProvide business insight, sales forecasting using Azure, Power BI and Power Apps",
             indexTitle: "02",
           ),
         ),
@@ -247,7 +247,7 @@ class _ExperienceSectionState extends State<ExperienceSection> {
             alignment: CrossAxisAlignment.start),
         timelineCard(
           content:
-              "Handle and support the largest local market retail systems, ERP and making business insight, sales forcasting using Azure, Power BI and Power Apps.",
+              "Handle and support reliable solutions through innovative technologies for large local retail systems and ERP.\nProvide business insight, sales forecasting using Azure, Power BI and Power Apps",
           indexTitle: "02",
         ),
         SizedBox(

@@ -13,7 +13,6 @@ class SkillSection extends StatefulWidget {
 class _SkillSectionState extends State<SkillSection>
     with SingleTickerProviderStateMixin {
   late AnimationController _skillAnimationController;
-  // late Animation _animation;
 
   @override
   void initState() {
@@ -31,19 +30,6 @@ class _SkillSectionState extends State<SkillSection>
     super.dispose();
 
     //_skillAnimationController.dispose();
-  }
-
-  Widget skillPercentMobile(context, title, double percent) {
-    var mediaQuery = MediaQuery.of(context);
-    double width = mediaQuery.size.width;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center, //remove
-      children: [
-        skillTitle(title),
-        skillPercentBar(context, percent, width),
-      ],
-    );
   }
 
   Widget skillTitle(String title, {double? textWidth = double.infinity}) {
@@ -70,7 +56,9 @@ class _SkillSectionState extends State<SkillSection>
       onVisibilityChanged: (VisibilityInfo info) {
         // var visiblePercentage = info.visibleFraction * 100;
         // debugPrint('Widget ${info.key} is $visiblePercentage% visible');
-        _skillAnimationController.forward();
+        if (mounted) {
+          _skillAnimationController.forward();
+        }
       },
       child: AnimatedBuilder(
         animation: _skillAnimationController,
@@ -119,6 +107,19 @@ class _SkillSectionState extends State<SkillSection>
       mainAxisAlignment: MainAxisAlignment.center, //remove
       children: [
         skillTitle(title, textWidth: 150),
+        skillPercentBar(context, percent, width),
+      ],
+    );
+  }
+
+  Widget skillPercentMobile(context, title, double percent) {
+    var mediaQuery = MediaQuery.of(context);
+    double width = mediaQuery.size.width;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center, //remove
+      children: [
+        skillTitle(title),
         skillPercentBar(context, percent, width),
       ],
     );
@@ -218,7 +219,7 @@ class _SkillSectionState extends State<SkillSection>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
@@ -230,12 +231,11 @@ class _SkillSectionState extends State<SkillSection>
               SizedBox(
                 height: 30,
               ),
-              skillPercent(context, "C#", 85),
-              skillPercent(context, "Flutter", 70),
+              skillPercent(context, "ASP.NET & C#", 80),
+              skillPercent(context, "Flutter", 80),
               skillPercent(context, "Java", 65),
               skillPercent(context, "Angular", 60),
-              skillPercent(context, "HTML, CSS, JS", 75),
-              skillPercent(context, "SQL", 80),
+              skillPercent(context, "SQL", 70),
             ],
           ),
           SizedBox(
@@ -264,12 +264,11 @@ class _SkillSectionState extends State<SkillSection>
           SizedBox(
             height: 30,
           ),
-          skillPercent(context, "C#", 85),
-          skillPercent(context, "Flutter", 70),
+          skillPercent(context, "C#", 80),
+          skillPercent(context, "Flutter", 80),
           skillPercent(context, "Java", 65),
           skillPercent(context, "Angular", 60),
-          skillPercent(context, "HTML, CSS, JS", 75),
-          skillPercent(context, "SQL", 80),
+          skillPercent(context, "SQL", 70),
           SizedBox(
             height: 30,
           ),
@@ -301,6 +300,7 @@ class _SkillSectionState extends State<SkillSection>
   }
 
   Widget mobileLayout(context) {
+    debugPrint("rebuild : skill mobile");
     return Container(
       margin: const EdgeInsets.all(30),
       child: Column(
@@ -315,12 +315,11 @@ class _SkillSectionState extends State<SkillSection>
           SizedBox(
             height: 30,
           ),
-          skillPercentMobile(context, "C#", 85),
-          skillPercentMobile(context, "Flutter", 70),
+          skillPercentMobile(context, "C#", 80),
+          skillPercentMobile(context, "Flutter", 80),
           skillPercentMobile(context, "Java", 65),
           skillPercentMobile(context, "Angular", 60),
-          skillPercentMobile(context, "HTML, CSS, JS", 75),
-          skillPercentMobile(context, "SQL", 80),
+          skillPercentMobile(context, "SQL", 70),
           SizedBox(
             height: 30,
           ),

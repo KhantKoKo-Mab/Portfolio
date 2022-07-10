@@ -42,50 +42,54 @@ class _HomeSectionState extends State<HomeSection>
     _imageController = new AnimationController(
         vsync: this, duration: Duration(milliseconds: 1500));
 
-    if (mounted) animate();
+    animate();
   }
 
   animate() async {
     Duration _delayDuration = new Duration(milliseconds: 300);
 
-    _helloTextController.forward();
+    if (mounted) {
+      _helloTextController.forward();
+    }
+
     await Future.delayed(_delayDuration, () {
-      _nameTextController.forward();
-    });
-    await Future.delayed(_delayDuration, () {
-      _jobTextController.forward();
+      if (mounted) {
+        _nameTextController.forward();
+      }
     });
 
     await Future.delayed(_delayDuration, () {
-      _introTextController.forward();
+      if (mounted) {
+        _jobTextController.forward();
+      }
     });
 
     await Future.delayed(_delayDuration, () {
-      _buttonController.forward();
+      if (mounted) {
+        _introTextController.forward();
+      }
     });
+
+    await Future.delayed(_delayDuration, () {
+      if (mounted) {
+        _buttonController.forward();
+      }
+    });
+
     await Future.delayed(Duration(milliseconds: 700), () {
-      _imageController.forward();
+      if (mounted) {
+        _imageController.forward();
+      }
     });
   }
 
   @override
   void dispose() {
-    _helloTextController.stop();
     _helloTextController.dispose();
-
-    _nameTextController.stop();
     _nameTextController.dispose();
-
-    _jobTextController.stop();
     _jobTextController.dispose();
-
-    _introTextController.stop();
     _introTextController.dispose();
-
-    _buttonController.stop();
     _buttonController.dispose();
-
-    _imageController.stop();
     _imageController.dispose();
     super.dispose();
   }
@@ -241,7 +245,7 @@ class _HomeSectionState extends State<HomeSection>
           'assets/images/hero.png',
           width: 550,
           height: 825,
-          fit: Responsive.isDesktop(context) ? BoxFit.cover : BoxFit.scaleDown,
+          fit: BoxFit.scaleDown,
         ),
       ),
     );

@@ -29,21 +29,29 @@ class _ServicesSectionState extends State<ServicesSection>
 
   animate() async {
     Duration _delayDuration = new Duration(milliseconds: 500);
-    _applicationAnimationController.forward();
+    if (mounted) {
+      _applicationAnimationController.forward();
+    }
+
     await Future.delayed(_delayDuration, () {
-      _promisesAnimationController.forward();
+      if (mounted) {
+        _promisesAnimationController.forward();
+      }
     });
+
     await Future.delayed(_delayDuration, () {
-      _cleanCodeAnimationController.forward();
+      if (mounted) {
+        _cleanCodeAnimationController.forward();
+      }
     });
   }
 
   @override
   void dispose() {
+    _applicationAnimationController.dispose();
+    _promisesAnimationController.dispose();
+    _cleanCodeAnimationController.dispose();
     super.dispose();
-    // _applicationAnimationController.dispose();
-    // _promisesAnimationController.dispose();
-    // _cleanCodeAnimationController.dispose();
   }
 
   Widget roundedCard(context, IconData icon, String title, String subtitle,
